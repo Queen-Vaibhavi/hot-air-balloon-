@@ -19,8 +19,8 @@ function setup() {
   balloon.addAnimation("hotAirBalloon",balloonImage1);
   balloon.scale=0.5;
 
-  var posi = database.ref('balloon/height');
-  posi.on("value",readPosition,showError);
+  var balloonPosition = database.ref('balloon/height');
+  balloonPosition.on("value",readPosition,showError);
 
   textSize(20); 
 }
@@ -60,16 +60,16 @@ function draw() {
 }//function draw bracket
 
 function updatePosi(x,y){
-database.ref('balloon/height').setup({
-  'x' : height.x + x,
-  'y' : height.y + y
+database.ref('balloon/height').set({
+  'x' : posi.x + x,
+  'y' : posi.y + y
 })
 }
 
 function readPosition(data){
-  height = data.val();
-  balloon.x = height.x;
-  balloon.y = height.y;
+  posi = data.val();
+  balloon.x = posi.x;
+  balloon.y = posi.y;
 }
 
 function showError(){
